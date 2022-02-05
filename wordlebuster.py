@@ -144,10 +144,24 @@ def winnow(winnowlist):
     return new_winnowlist
 
 
+def recalculate_order(winnowlist):
+    """sorts the winnowlist based on how many misplaced characters it has
 
+    Args:
+        winnowlist ([type]): [description]
+    """
 
+    for entry in winnowlist:
+        word = entry["word"]
 
+        misplaced_letters_present = list(map(word.lower().count, misplaced_letters))
+        # count total vowels
+        score = sum(misplaced_letters_present)
+        # unique_vowels = map(some_or_none, vowels)
+        # ucount = sum(unique_vowels) 
+        entry["misplaced_score"] = score
 
+    return sorted(winnowlist, key=lambda d: d['misplaced_score'], reverse=True)
 
 
 
@@ -166,6 +180,7 @@ while len(winnowlist) > 1:
     winnowlist = winnow(winnowlist)
     if winnowlist[0]['word'] == guess_word:
         winnowlist.remove(winnowlist[0])
+    winnowlist = recalculate_order(winnowlist)
     # print(*map(lambda d: d["word"], winnowlist))
     # print(excluded_letters)
 
