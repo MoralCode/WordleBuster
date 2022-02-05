@@ -181,7 +181,12 @@ while len(winnowlist) > 1:
     print("Your next word to guess is: " + guess_word)
 
 
-    user_input = input("what did this word score? Enter C if the character was correct, X if it is wrong, and M if it was misplaced:")
+    user_input = input("what did this word score? Enter C if the character was correct, X if it is wrong, and M if it was misplaced. if the word is invalid in your game, enter INVALID:")
+    if user_input == "INVALID":
+        words_in_list = list(map(lambda d: d["word"], winnowlist))
+        index = words_in_list.index(guess_word)
+        del winnowlist[index]
+        continue
     update_hints(user_input, guess_word)
     winnowlist = winnow(winnowlist)
     if winnowlist[0]['word'] == guess_word:
