@@ -98,7 +98,9 @@ def update_hints(user_input, word, wordlength=5):
     if set(user_input.lower())-set("cxm"):
         raise ValueError("User input can only contain the following characters (case insensitive): C X M")
 
-    data = zip(word, user_input, range(wordlength))  
+    data = zip(word, user_input, range(wordlength))
+
+    to_exclude = []
     for char in data:
         letter, result, index = char
         result = result.lower()
@@ -107,12 +109,16 @@ def update_hints(user_input, word, wordlength=5):
             if letter in misplaced_letters:
                 misplaced_letters.remove(letter)
             
+            if letter in to_exclude:
+                to_exclude.remove(letter)
+            
             if correct_letters[index] == "_":
                 correct_letters[index] = letter
-        elif result == "x":
-            excluded_letters.append(letter)
+        elif result == "x" and letter not in correct_letters:
+            to_exclude.append(letter)
         elif result == "m":
             misplaced_letters.append(letter)
+    excluded_letters.extend(to_exclude)
 
 def check_word(word):
     for index, letter in enumerate(word):
