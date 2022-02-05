@@ -146,25 +146,12 @@ def winnow(winnowlist):
 
 
 
-        # # ...it contains any excluded letters
-        # if set(word.lower()).intersection(excluded_set):
-        #     pass # do nothing
-        # # ...it is missing one of the correect letters in the correct spots
-        # # elif 
 
-        # # ...it is missing at least one misplaced letter
-        # elif set(word.lower()).intersection(misplaced_set) != misplaced_set:
-        #     pass
-
-        # else:
-        #     new_winnowlist.append(word)
 
 
 
 
     
-
-
 
 # start a prompt loop
 
