@@ -39,7 +39,7 @@ import csv
 # count the unique vowels in each word (so multiple e's dont screw with it)
 
 # interesting fact: "audio" is statistically the best first word to pick because it has 4 of the 5 vowels in it
-
+words = wordlist.wordle_solutions
 winnowlist = []
 
 correct_letters = list("_____")
@@ -56,7 +56,7 @@ with open('vowelcounts-unique.csv', 'w') as csvfile:
 
     writer.writeheader()
 
-    for word in wordlist.wordlist:
+    for word in words:
         vowels = list(map(word.lower().count, "aeiou"))
         # count total vowels
         count = sum(vowels)
